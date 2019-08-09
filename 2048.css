@@ -1,0 +1,12 @@
+header {
+    display: block;
+    margin:0 auto;
+    width:500px;
+    text-align: center;
+}
+
+header #newGameButton{
+    width:100px;
+    height: 40px;
+    background: coral;
+}

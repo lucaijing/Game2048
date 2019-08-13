@@ -44,7 +44,7 @@ header #score{
     width:460px;
     height: 460px;
     background: #bbada0;
-    border-radius: 10px;
+    border-radius: 20px;
     position: relative;
     padding: 20px 20px;
 }
@@ -53,6 +53,13 @@ header #score{
     background: #cdc0b4;
     width: 100px;
     height: 100px;
-    border-radius: 3px;
+    border-radius: 10px;
+    position: absolute;
+}
+
+.number-item {
+    width: 100px;
+    height: 100px;
+    border-radius: 10px;
     position: absolute;
 }

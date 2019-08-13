@@ -44,11 +44,13 @@ function updateBoardView() {
             if (board[i][j] != 0){
                 let number = board[i][j];
                 $(findById).text(number);
-                $(findById).css({"background": getBackground(number), "color":"#776e65", "font-size":"50px", "font-family":"Arial",
-                });
+                $(findById).css({"background": getBackground(number), "color":getFontColor(number), "font-size":"50px", "font-family":"Arial",
+                    "line-height":"100px", "text-align":"center", "font-weight":"bold", "display":"none"});//文字垂直居中：将行高line-height设置为方格高度
             }
         }
     }
+    $(".number-item").fadeIn();//动画效果：淡入
+    // 将display设置为none，不显示，使用动画效果显示class为number-item的元素
 }
 
 function generateOneNum() {

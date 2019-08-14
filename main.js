@@ -4,6 +4,97 @@ $(document).ready(function(){
     newGame();
 })
 
+function inputLeft() {
+    for (let i=0;i<4;i++){//向左累加相同数字,注意即使相同的数字之间空几格也可以
+        for (let j=0;j<3;j++){
+            if (board[i][j]==board[i][j+1]){
+                board[i][j]=board[i][j]*2;
+                //别忘记要清空右边的数字
+                board[i][j+1]=0;
+            }
+        }
+    }
+    let newBoard=new Array();
+    for (let i=0;i<4;i++){
+        newBoard[i] = new Array();
+        for (let j=0;j<4;j++){
+            newBoard[i][j] = 0;
+        }
+    }
+
+    for (let i=0;i<4;i++){//向左移动,newboard保存向左移动的数组
+        let count=0;
+        for (let j=0;j<4;j++){
+            if (board[i][j]!=0){
+                newBoard[i][count++]=board[i][j];
+            }
+        }
+    }
+    for (let i=0;i<4;i++){
+        for (let j=0;j<4;j++){
+                board[i][j]=newBoard[i][j];
+        }
+    }
+
+    updateBoardView();
+}
+
+function isGameOver() {
+    let flag = false;//flag为false表示游戏不可继续，true表示游戏可以继续
+    for (let i=0;i<4;i++){
+        for (let j=0;j<4;j++){
+            if (board[i][j] == 0){//有空余格子
+                flag = true;break;
+            }
+            if ((board[i][j+1] == board[i][j]) && j<3 ){//一行里有相同的可以消除
+                flag = true; break;
+            }
+            if ((board[i+1][j] == board[i][j]) && i<3 ){//一列里有相同的可以消除
+                flag = true; break;
+            }
+        }
+    }
+    if(flag == false){alert("Game Over!");}
+
+}
+
+function inputRight() {
+    return false;
+}
+
+function inputTop() {
+    return false;
+}
+
+function inputBottom() {
+    return false;
+}
+
+$(document).keydown(function (event){//按下方向键
+    switch (event.which) {
+        case 37:
+            inputLeft();
+            generateOneNum();
+            break;//左
+        case 38:
+            inputTop();
+            generateOneNum();
+            break;//上
+        case 39:
+            inputRight();
+            generateOneNum();
+            //console.log('right')
+            break;//右
+        case 40:
+            inputBottom();
+            generateOneNum();
+            //console.log('bottom')
+            break;//下
+        default:isGameOver();break;
+    }
+
+})
+
 function newGame() {
     init();
     generateOneNum();
@@ -31,7 +122,7 @@ function init() {
     updateBoardView();
 }
 
-function updateBoardView() {
+function updateBoardView() {//刷新游戏界面
     $(".number-item").remove();
     for (let i = 0; i < 4; i++){
         for (let j = 0; j < 4; j++){

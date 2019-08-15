@@ -7,10 +7,24 @@ $(document).ready(function(){
 function inputLeft() {
     for (let i=0;i<4;i++){//向左累加相同数字,注意即使相同的数字之间空几格也可以
         for (let j=0;j<3;j++){
-            if (board[i][j]==board[i][j+1]){
+            // if (board[i][j]==board[i][j+1]){
+            //     board[i][j]=board[i][j]*2;
+            //     //别忘记要清空右边的数字
+            //     board[i][j+1]=0;
+            // }
+            let k=0;let sum=0;
+            for(k=j+1;k<4;k++){//找到第一个与board[i][j]相等的数字board[i][k], 并把board[i][j]...board[i][k]累加起来=sum
+                if(board[i][j]==board[i][k]){
+                    sum=0;
+                    for(let z=j;z<=k;z++){
+                        sum+=board[i][z];
+                    }
+                    break;
+                }
+            }
+            if((sum==board[i][j]*2)&&sum!=0){
                 board[i][j]=board[i][j]*2;
-                //别忘记要清空右边的数字
-                board[i][j+1]=0;
+                board[i][k]=0;
             }
         }
     }

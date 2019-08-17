@@ -5,6 +5,7 @@ $(document).ready(function(){
     newGame();
 })
 
+
 function inputLeft() {
     for (let i=0;i<4;i++){//向左累加相同数字,注意即使相同的数字之间空几格也可以
         for (let j=0;j<3;j++){
@@ -23,7 +24,7 @@ function inputLeft() {
                     break;
                 }
             }
-            if((sum==board[i][j]*2)&&sum!=0){
+            if((sum==board[i][j]*2)&&sum!=0){//如果可以移动的话
                 board[i][j]=board[i][j]*2;
                 score+=board[i][j];
                 board[i][k]=0;
@@ -51,8 +52,6 @@ function inputLeft() {
                 board[i][j]=newBoard[i][j];
         }
     }
-
-    updateBoardView();
 }
 
 function isGameOver() {
@@ -280,14 +279,21 @@ function updateBoardView() {//刷新游戏界面
             if (board[i][j] != 0){
                 let number = board[i][j];
                 $(findById).text(number);
-                $(findById).css({"background": getBackground(number), "color":getFontColor(number), "font-size":"50px", "font-family":"Arial",
-                    "line-height":"100px", "text-align":"center", "font-weight":"bold", "display":"none"});//文字垂直居中：将行高line-height设置为方格高度
+                $(findById).css({"background": getBackground(number), "color":getFontColor(number)
+                    , "display":"none"
+                    });//文字垂直居中：将行高line-height设置为方格高度
             }
+            // $(findById).animate({
+            //     top:getTop(i,j),
+            //     left:getLeft(i,j)
+            // })
         }
+
     }
-    $(".number-item").fadeIn();//动画效果：淡入
+
+    $(".number-item").fadeIn();//动画效果：淡入 与display none搭配使用
     $("#score").text(score);
-    // 将display设置为none，不显示，使用动画效果显示class为number-item的元素
+    // 将display设置为none不显示，使用动画效果【显示】class为number-item的元素
 }
 
 function generateOneNum() {
